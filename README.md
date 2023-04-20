@@ -23,7 +23,9 @@ Replace <username> with the username of the user for whom you want to use the 10
 <br>
 The script creates a folder structure for programming projects at the following location:
 <br><br>
-**\\/home\\/\<username\>\\/Desktop\\/programming\\/**<br><br>
+  
+  **/home/{username}/Desktop/programming/**
+  <br><br>
 Inside the programming folder, the script creates subfolders for C, C++, Python, Assembly, and Bash scripts.<br><br>
   
 # Executable Files
