@@ -31,7 +31,7 @@ Inside the programming folder, the script creates subfolders for C, C++, Python,
 # Executable Files
 
 The script creates 10 executable files:
-<br>
+<br><br>
 **asm**<br>
 
 This file is used to create and edit Assembly files.<br>
@@ -89,11 +89,11 @@ The script also calculates the time it takes to compile and run the program.<br>
 
 
 **py**
-
+<br><br>
 This file is used to create and edit Python files. <br>
 If the file already exists, the script opens the file in Vim. <br>
 If the file does not exist, the script creates the file and opens it in Vim.<br><br>
-**pyrun**<br>
+**pyrun**<br><br>
 This file is used to run a Python program.<br>
 The script runs the program using Python 3 and calculates the time it takes to run the program.<br><br>
 
