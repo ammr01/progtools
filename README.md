@@ -9,7 +9,7 @@ which can be used to compile and run programs written in Assembly, C, C++ and Py
 The script is designed to work on Linux operating systems, specifically those that use the apt package manager (such as Debian and Ubuntu).<br>
 The script requires root privileges to run.
 
-#Usage
+# Usage
 
 To run the script, execute the following command with root privileges:<br><br>
 
@@ -23,7 +23,7 @@ Replace <username> with the username of the user for whom you want to use the 10
 <br>
 The script creates a folder structure for programming projects at the following location:
 <br><br>
-**/home/<username>/Desktop/programming/**
+**/home/\<username\>/Desktop/programming/**
 <br><br>
 Inside the programming folder, the script creates subfolders for C, C++, Python, Assembly, and Bash scripts.
 <br><br>
