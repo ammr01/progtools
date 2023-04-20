@@ -13,9 +13,9 @@ The script requires root privileges to run.
 
 To run the script, execute the following command with root privileges:<br><br>
 
-**sudo ./progtools64.sh <username>**<br><br>
+**sudo ./progtools64.sh \<username\>**<br><br>
 or<br><br>
-**sudo ./progtools32.sh <username>**<br>
+**sudo ./progtools32.sh \<username\>**<br>
 *for 32 systems.<br><br>
 Replace <username> with the username of the user for whom you want to use the 10 executable files.<br><br>
 
@@ -23,7 +23,7 @@ Replace <username> with the username of the user for whom you want to use the 10
 <br>
 The script creates a folder structure for programming projects at the following location:
 <br><br>
-**/home/<username>\/Desktop\/programming/**<br><br>
+**\/home\/\<username\>\/Desktop\/programming\/**<br><br>
 Inside the programming folder, the script creates subfolders for C, C++, Python, Assembly, and Bash scripts.<br><br>
   
 # Executable Files
