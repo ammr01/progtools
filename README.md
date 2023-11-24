@@ -90,7 +90,7 @@ The executable files created by the script make it easy to create, edit, and run
 
 
 # Examples
-
+<br>**C**<br><br>
 to create a new C project called example in `{user home directory}/programming/C/example` : <br><br>
 `cee example` 
 <br><br>
@@ -102,6 +102,7 @@ this will compile example.c using the provided gcc options "-pthred and -g", and
 -e : pass args to elf file
 -c : pass options to gcc on compilation
  <br><br><br>
+ <br>**C++**<br><br>
 <br>
  to create a new C++ project called example in `{user home directory}/programming/C++/example` : <br><br>
 `cee++ example`
@@ -117,7 +118,7 @@ this will compile example.cpp using the provided gpp options "gpp options", and 
 
 
 <br><br><br><br>
-
+<br>**Assembly**<br><br>
 to create a new asm project called example in `{user home directory}/programming/asm/example` : <br><br>
 `asm example`
 <br><br>
@@ -131,7 +132,7 @@ this will assemble example.asm using nasm and link using ld, and will pass arg1 
 
 <br><br>
 <br>
-
+<br>**Python3**<br><br>
 
 to create a new python3 project called example in `{user home directory}/programming/pyhton/example` : <br><br>
 `py example`
