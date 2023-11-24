@@ -73,7 +73,7 @@ if [ "$#" -eq 1 ]; then
             register2="rdi"
             syscallid="60"
             call="syscall"
-        elif [ "$arch" == "i386" ]; then
+        elif [ "$arch" == "i386" ]  || [ "$arch" == "i686" ]; then
             register1="eax"
             register2="ebx"
             syscallid="1"
@@ -116,7 +116,7 @@ if [ "$#" -eq 1 ]; then
         if [ "$arch" == "x86_64" ]; then
             f="elf64"
             m=elf_x86_64
-        elif [ "$arch" == "i386" ]; then
+        elif [ "$arch" == "i386" ] || [ "$arch" == "i686" ]; then
             f="elf32"
             m=elf_i386
         else
