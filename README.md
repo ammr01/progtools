@@ -141,6 +141,6 @@ the script will open the main python file called example.py in the chosen text e
 to run example project use:<br><br>
 `runp example "arg1 arg2"`
 <br><br> 
-this will execute example.py, and will pass arg1 and <br> arg2 to example elf file.<br>
+this will execute example.py, and will pass arg1 and <br> arg2 to example python file.<br>
 
 
