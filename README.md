@@ -91,55 +91,55 @@ The executable files created by the script make it easy to create, edit, and run
 
 # Examples
 
-to create a new C project called example in **{user home directory}/programming/C/example** : <br>
-**cee example**
-<br>
+to create a new C project called example in **{user home directory}/programming/C/example** : <br><br>
+`cee example` 
+<br><br>
 the script will open the main C file called example.c in the chosen text editor in the progtools installation.<br>
-to run example project use:<br>
-**runc -c "-pthread -g" -e "arg1 arg2" example**
-<br> 
+to run example project use:<br><br>
+`runc -c "-pthread -g" -e "arg1 arg2" example`
+<br> <br>
 this will compile example.c using the provided gcc options "-pthred and -g", and will pass arg1 and <br> arg2 to example elf file.<br>
 -e : pass args to elf file
 -c : pass options to gcc on compilation
  <br><br><br>
-
- to create a new C++ project called example in **{user home directory}/programming/C++/example** : <br>
-**cee++ example**
 <br>
+ to create a new C++ project called example in **{user home directory}/programming/C++/example** : <br><br>
+`cee++ example`
+<br><br>
 the script will open the main C++ file called example.cpp in the chosen text editor in the progtools installation.<br>
-to run example project use:<br>
-**runc++ -c "gpp options" -e "arg1 arg2" example**
-<br> 
+to run example project use:<br><br>
+`runc++ -c "gpp options" -e "arg1 arg2" example`
+<br><br> 
 this will compile example.cpp using the provided gpp options "gpp options", and will pass arg1 and <br> arg2 to example elf file.<br>
 -e : pass args to elf file
 -c : pass options to gpp on compilation
 
 
 
-<br><br><br>
+<br><br><br><br>
 
-to create a new asm project called example in **{user home directory}/programming/asm/example** : <br>
-**asm example**
-<br>
+to create a new asm project called example in **{user home directory}/programming/asm/example** : <br><br>
+`asm example`
+<br><br>
 the script will open the main asm file called example.asm in the chosen text editor in the progtools installation.<br>
-to run example project use:<br>
-**runa example "arg1 arg2"**
-<br> 
+to run example project use:<br><br>
+`runa example "arg1 arg2"`
+<br> <br>
 this will assemble example.asm using nasm and link using ld, and will pass arg1 and <br> arg2 to example elf file.<br>
 
 
 
 <br><br>
-
-
-
-to create a new python3 project called example in **{user home directory}/programming/pyhton/example** : <br>
-**py example**
 <br>
+
+
+to create a new python3 project called example in **{user home directory}/programming/pyhton/example** : <br><br>
+`py example`
+<br><br>
 the script will open the main python file called example.py in the chosen text editor in the progtools installation.<br>
-to run example project use:<br>
-**runp example "arg1 arg2"**
-<br> 
+to run example project use:<br><br>
+`runp example "arg1 arg2"`
+<br><br> 
 this will execute example.py, and will pass arg1 and <br> arg2 to example elf file.<br>
 
 
