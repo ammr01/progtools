@@ -13,16 +13,16 @@ The script requires root privileges to run.
 
 To run the script, execute the following command with root privileges:<br><br>
 
-**sudo ./progtools.sh \<username\>**<br><br>
+`sudo ./progtools.sh \<username\>`<br><br>
 
-Replace <username> with the username of the user for whom you want to use the 8 executable files.<br><br>
+Replace <username> with the username of the user for whom you want to use the<br>tools and install file structure in his home directory.<br><br>
 
 # Folder Structure
 <br>
 The script creates a folder structure for programming projects at the following location:
 <br><br>
   
-  **{user home directory}/programming/**
+  `{user home directory}/programming/`
   <br><br>
 Inside the programming folder, the script creates subfolders for C, C++, Python, Assembly, and Bash scripts.<br><br>
   
@@ -91,7 +91,7 @@ The executable files created by the script make it easy to create, edit, and run
 
 # Examples
 
-to create a new C project called example in **{user home directory}/programming/C/example** : <br><br>
+to create a new C project called example in `{user home directory}/programming/C/example` : <br><br>
 `cee example` 
 <br><br>
 the script will open the main C file called example.c in the chosen text editor in the progtools installation.<br>
@@ -103,7 +103,7 @@ this will compile example.c using the provided gcc options "-pthred and -g", and
 -c : pass options to gcc on compilation
  <br><br><br>
 <br>
- to create a new C++ project called example in **{user home directory}/programming/C++/example** : <br><br>
+ to create a new C++ project called example in `{user home directory}/programming/C++/example` : <br><br>
 `cee++ example`
 <br><br>
 the script will open the main C++ file called example.cpp in the chosen text editor in the progtools installation.<br>
@@ -118,7 +118,7 @@ this will compile example.cpp using the provided gpp options "gpp options", and 
 
 <br><br><br><br>
 
-to create a new asm project called example in **{user home directory}/programming/asm/example** : <br><br>
+to create a new asm project called example in `{user home directory}/programming/asm/example` : <br><br>
 `asm example`
 <br><br>
 the script will open the main asm file called example.asm in the chosen text editor in the progtools installation.<br>
@@ -133,7 +133,7 @@ this will assemble example.asm using nasm and link using ld, and will pass arg1 
 <br>
 
 
-to create a new python3 project called example in **{user home directory}/programming/pyhton/example** : <br><br>
+to create a new python3 project called example in `{user home directory}/programming/pyhton/example` : <br><br>
 `py example`
 <br><br>
 the script will open the main python file called example.py in the chosen text editor in the progtools installation.<br>
