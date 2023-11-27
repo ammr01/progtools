@@ -109,11 +109,11 @@ this will compile example.c using the provided gcc options "-pthred and -g", and
 <br><br>
 the script will open the main C++ file called example.cpp in the chosen text editor in the progtools installation.<br>
 to run example project use:<br><br>
-`runc++ -c "gpp options" -e "arg1 arg2" example`
+`runc++ -c "g++ options" -e "arg1 arg2" example`
 <br><br> 
-this will compile example.cpp using the provided gpp options "gpp options", and will pass arg1 and <br> arg2 to example elf file.<br>
+this will compile example.cpp using the provided g++ options "g++ options", and will pass arg1 and <br> arg2 to example elf file.<br>
 -e : pass args to elf file
--c : pass options to gpp on compilation
+-c : pass options to g++ on compilation
 
 
 
