@@ -14,7 +14,7 @@ if [ "$#" -eq 1 ]; then
                 echo "You selected: $editor"
                 # Install the selected editor
                 apt update
-                apt install -fy nasm g++ gcc gdb python3 bc "$editor"
+                apt install -fy nasm g++ gcc gdb python3 bc g++ "$editor"
                 break
             else
                 {>&2 echo "Invalid choice. Please enter a valid number."; exit 1;}  # Exit the script with an error code
@@ -475,7 +475,7 @@ if [ "$#" -eq 1 ]; then
         s1=$(date +%%s.%%N)
 
         # Compile the C++ script with additional options
-        gpp "$script_name.cpp" $gpp_options -o "$script_name" || {>&2 echo "Error: Compilation failed.";usage; exit 1; }
+        g++ "$script_name.cpp" $gpp_options -o "$script_name" || {>&2 echo "Error: Compilation failed.";usage; exit 1; }
 
         e1=$(date +%%s.%%N)
         t1=$(echo "$e1 - $s1" | bc -l)
