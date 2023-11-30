@@ -1,146 +1,142 @@
-# progtools
+# ProgTools
 
-This is a bash script designed to install essential programming tools and builds up the beginner programming environment.<br>
-The script also creates ten executable files, asm, runa, py, runp, cee, runc, cee++, runc++.<br>
-which can be used to compile and run programs written in Assembly, C, C++ and Python.<br><br>
+ProgTools is a versatile bash script designed to streamline the installation of essential programming tools and facilitate the setup of a beginner-friendly programming environment. The script creates a standardized folder structure for programming projects, allowing users to easily organize and manage their codebase. Additionally, ProgTools generates ten executable files, each tailored to specific programming languages, namely Assembly, C, C++, Python, and Bash.
 
-# Requirements
+## Requirements
 
-The script is designed to work on Linux operating systems, specifically those that use the apt package manager (such as Debian and Ubuntu).<br>
-The script requires root privileges to run.
+ProgTools is intended for use on Linux operating systems, particularly those utilizing the apt package manager (such as Debian and Ubuntu). Root privileges are required to execute the script successfully.
 
-# Usage
+## Usage
 
-To run the script, execute the following command with root privileges:<br><br>
+To run ProgTools, execute the following command with root privileges:
 
-`sudo ./progtools.sh \<username\>`<br><br>
+```bash
+sudo ./progtools.sh <username>
+```
 
-Replace <username> with the username of the user for whom you want to use the<br>tools and install file structure in his home directory.<br><br>
+Replace `<username>` with the desired user's username to install the tools and create the file structure in their home directory.
 
-# Folder Structure
-<br>
-The script creates a folder structure for programming projects at the following location:
-<br><br>
-  
-  `{user home directory}/programming/`
-  <br><br>
-Inside the programming folder, the script creates subfolders for C, C++, Python, Assembly, and Bash scripts.<br><br>
-  
-# Executable Files
+## Folder Structure
 
-The script creates 8 executable files:
-<br><br>
-**asm**<br>
+The script establishes a standardized folder structure for programming projects at the following location:
 
-This file is used to create and edit Assembly files.<br>
-If the file already exists, the script opens the file in the chosen text editor. <br>
-If the file does not exist, the script creates the file and adds a template for an Assembly program based on system arch.<br><br>
+```
+{user home directory}/programming/
+```
 
-**runa**
-<br><br>
-This file is used to assemble, link, and run an Assembly program.<br>
-The script assembles the program using NASM, links it using LD, and then runs the program.<br> 
-The script also calculates the time it takes to assemble and run the program.<br><br>
+Inside the programming folder, subfolders are created for C, C++, Python, Assembly, and Bash scripts.
 
+## Executable Files
 
-**cee**
-<br><br>
-This file is used to create and edit C files.<br>
-If the file already exists, the script opens the file in the chosen text editor. <br>
-If the file does not exist, the script creates the file and adds a template for an C program.<br><br>
+ProgTools generates eight executable files with specific purposes:
 
+- **asm**: Create and edit Assembly projects.
+- **runa**: Assemble, link, and run Assembly projects.
+- **cee**: Create and edit C projects.
+- **runc**: Compile and run C projects.
+- **cee++**: Create and edit C++ projects.
+- **runc++**: Compile and run C++ projects.
+- **py**: Create and edit Python projects.
+- **runp**: Run Python projects.
+- **bscript**: Create and edit Bash scripts.
+- **runb**: Run Bash scripts.
 
-**runc**
-<br><br>
-This file is used to compile and run an C program.<br>
-The script compile the program using GCC and then runs the program.<br> 
-The script also calculates the time it takes to compile and run the program.<br><br>
+## Conclusion
 
+ProgTools simplifies the installation of essential programming tools and establishes a well-organized structure for programming projects. The generated executable files enable effortless creation, editing, and execution of programs in Assembly, C, C++, Bash, and Python.
 
-**cee++**
-<br><br>
-This file is used to create and edit C++ files.<br>
-If the file already exists, the script opens the file in the chosen text editor. <br>
-If the file does not exist, the script creates the file and adds a template for an C++ program.<br><br>
+## Examples
 
+### C
 
-**runc++**
-<br><br>
-This file is used to compile and run an C++ program.<br>
-The script compile the program using G++ and then runs the program.<br> 
-The script also calculates the time it takes to compile and run the program.<br><br>
+To create a new C project called "example" in `{user home directory}/programming/C/example`:
 
+```bash
+cee example
+```
 
+To add a new C file called "koko.c" to the "example" project and open it in the chosen text editor:
 
-**py**
-<br><br>
-This file is used to create and edit Python files. <br>
-If the file already exists, the script opens the file in the chosen text editor. <br>
-If the file does not exist, the script creates the file and opens the file in the chosen text editor.<br><br>
+```bash
+cee example --add koko.c
+```
 
+To compile and run the "example" project with specific options and arguments:
 
-**runp**<br><br>
-This file is used to run a Python program.<br>
-The script runs the program using Python 3 and calculates the time it takes to run the program.<br><br>
+```bash
+runc -c "-pthread -g -O3" -a "arg1 arg2" example
+```
 
-# Conclusion
+### C++
 
-This script is a simple way to install essential programming tools and set up a folder structure <br>for programming projects.<br>
-The executable files created by the script make it easy to create, edit, and run programs in Assembly, C, C++ and Python.
+To create a new C++ project called "example" in `{user home directory}/programming/C++/example`:
 
+```bash
+cee++ example
+```
 
-# Examples
-<br>**C**<br><br>
-to create a new C project called example in `{user home directory}/programming/C/example` : <br><br>
-`cee example` 
-<br><br>
-the script will open the main C file called example.c in the chosen text editor in the progtools installation.<br>
-to run example project use:<br><br>
-`runc -c "-pthread -g" -e "arg1 arg2" example`
-<br> <br>
-this will compile example.c using the provided gcc options "-pthred and -g", and will pass arg1 and <br> arg2 to example elf file.<br>
--e : pass args to elf file
--c : pass options to gcc on compilation
- <br><br><br>
- <br>**C++**<br><br>
-<br>
- to create a new C++ project called example in `{user home directory}/programming/C++/example` : <br><br>
-`cee++ example`
-<br><br>
-the script will open the main C++ file called example.cpp in the chosen text editor in the progtools installation.<br>
-to run example project use:<br><br>
-`runc++ -c "g++ options" -e "arg1 arg2" example`
-<br><br> 
-this will compile example.cpp using the provided g++ options "g++ options", and will pass arg1 and <br> arg2 to example elf file.<br>
--e : pass args to elf file
--c : pass options to g++ on compilation
+To add a new C++ file called "koko.cpp" to the "example" project and open it in the chosen text editor:
 
+```bash
+cee++ example --add koko.cpp
+```
 
+To compile and run the "example" project with specific options and arguments:
 
-<br><br><br><br>
-<br>**Assembly**<br><br>
-to create a new asm project called example in `{user home directory}/programming/asm/example` : <br><br>
-`asm example`
-<br><br>
-the script will open the main asm file called example.asm in the chosen text editor in the progtools installation.<br>
-to run example project use:<br><br>
-`runa example "arg1 arg2"`
-<br> <br>
-this will assemble example.asm using nasm and link using ld, and will pass arg1 and <br> arg2 to example elf file.<br>
+```bash
+runc++ -c "-option1 -option2" -a "arg1 arg2" example
+```
 
+### Assembly
 
+To create a new Assembly project called "example" in `{user home directory}/programming/asm/example`:
 
-<br><br>
-<br>
-<br>**Python3**<br><br>
+```bash
+asm example
+```
 
-to create a new python3 project called example in `{user home directory}/programming/pyhton/example` : <br><br>
-`py example`
-<br><br>
-the script will open the main python file called example.py in the chosen text editor in the progtools installation.<br>
-to run example project use:<br><br>
-`runp example "arg1 arg2"`
-<br><br> 
-this will execute example.py, and will pass arg1 and <br> arg2 to example python file.<br>
+To add a new Assembly file called "koko.asm" to the "example" project and open it in the chosen text editor:
 
+```bash
+asm example --add koko.asm
+```
 
+To assemble and link the "example" project with specific options and arguments:
+
+```bash
+runa -l "-ld_option1 -ld_option2" -a "arg1 arg2" -n "-nasm_option1 -nasm_option2"  example
+```
+
+### Bash
+
+To create a new Bash script project called "example" in `{user home directory}/programming/bash/example`:
+
+```bash
+bscript example
+```
+
+To add a new Bash script file called "koko.sh" to the "example" project and open it in the chosen text editor:
+
+```bash
+bscript example --add koko.sh
+```
+
+To run the "example" Bash script with specific arguments:
+
+```bash
+runb example --args "arg1 arg2"
+```
+
+### Python3
+
+To create a new Python3 project called "example" in `{user home directory}/programming/python/example`:
+
+```bash
+py example
+```
+
+To run the "example" Python script with specific arguments:
+
+```bash
+runp example --args 	"arg1 arg2"
+```
