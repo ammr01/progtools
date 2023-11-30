@@ -138,5 +138,5 @@ py example
 To run the "example" Python script with specific arguments:
 
 ```bash
-runp example --args 	"arg1 arg2"
+runp example --args "arg1 arg2"
 ```
