@@ -11,9 +11,9 @@ create_exe() {
 
             
     if [ "$#" -lt 2 ]; then
-        {>&2 echo "Error : Few arguments to create() function."; return 2;}
+        {>&2 echo "Error : Few arguments to create_exe() function."; return 2;}
     elif [ "$#" -gt 2 ]; then
-        {>&2 echo "Error : Many arguments to create() function."; return 2;}
+        {>&2 echo "Error : Many arguments to create_exe() function."; return 2;}
     
     fi
 
@@ -27,6 +27,26 @@ create_exe() {
     chown $user_name:$user_name $file_name || {>&2 echo "Error : Cannot change ownership for : $file_name"; return 1;} 
 
     chmod 555 $file_name || {>&2 echo "Error : Cannot change permissions for : $file_name"; return 1;} 
+
+}
+
+create_directory() {
+
+            
+    if [ "$#" -lt 1 ]; then
+        {>&2 echo "Error : Few arguments to create_directory() function."; return 2;}
+    elif [ "$#" -gt 1 ]; then
+        {>&2 echo "Error : Many arguments to create_directory() function."; return 2;}
+    
+    fi
+
+    directory=$1
+
+    if [[ -d $directory ]]; then
+        return 0
+    else
+        mkdir -p $directory || {>&2 echo "Error : Cannot create directory : $directory"; return 1;} 
+    fi
 
 }
 
@@ -50,7 +70,13 @@ fill_file() {
     create_directory $directory || return $?
     cd $directory
     if [[ -f "$file_name" ]]; then
-        return 0
+      
+        if [[ -z $(cat $file_name) ]]; then
+            echo "$string" > $file_name || {>&2 echo "Error : Cannot write to : $file_name"; return 1;}
+        else
+            return 0            
+        fi
+      
     else
         echo "$string" > $file_name || {>&2 echo "Error : Cannot write to : $file_name"; return 1;}
     fi
@@ -71,7 +97,7 @@ install_deps() {
             echo "You selected: $editor"
             # Install the selected editor
             apt update
-            apt install -fy nasm g++ gcc gdb python3 bc "$editor"
+            apt install -fy nasm g++ gcc gdb python3 bc $editor
             break
         else
             {>&2 echo "Invalid choice. Please enter a valid number."; exit 1;}  # Exit the script with an error code
@@ -131,11 +157,11 @@ cee_content="    #!/bin/bash
             
             #try to create or open the file 
             if [[ -f \"\$file_name\" ]]; then
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^
             else
                 create \$directory \$file_name || return \$?
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^    
             fi
 
@@ -486,11 +512,11 @@ ceepp_content="   #!/bin/bash
             
             #try to create or open the file 
             if [[ -f \"\$file_name\" ]]; then
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^
             else
                 create \$directory \$file_name || return \$?
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^    
             fi
 
@@ -851,11 +877,11 @@ asm_content="
             
             #try to create or open the file 
             if [[ -f \"\$file_name\" ]]; then
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^
             else
                 create \$directory \$file_name || return \$?
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^    
             fi
 
@@ -1222,11 +1248,11 @@ bscript_content="   #!/bin/bash
             
             #try to create or open the file 
             if [[ -f \"\$file_name\" ]]; then
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^
             else
                 create \$directory \$file_name || return \$?
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^    
             fi
 
@@ -1554,11 +1580,11 @@ set_py_content() {
             
             #try to create or open the file 
             if [[ -f \"\$file_name\" ]]; then
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^
             else
                 create \$directory \$file_name || return \$?
-                $editor \"\$file_name\" & 
+                $editor \"\$file_name\" 
                #^^^^    
             fi
 
@@ -1669,12 +1695,38 @@ set_py_content() {
     add_and_fill() {
         directory=\"\$programming_dir/\$1\"
         file_name=\$2
+        set_main_template
+        fill_file  \$directory \$file_name \"\$python_template\" || return \$?
+        cd \$directory || return \$?
+        chmod u+x \$file_name || return \$?
+        open_file \$1 \$2 || return \$?
+    }
+
+    add_and_fill2() {
+        directory=\"\$programming_dir/\$1\"
+        file_name=\$2
         set_python_template
         fill_file  \$directory \$file_name \"\$python_template\" || return \$?
         cd \$directory || return \$?
         chmod u+x \$file_name || return \$?
         open_file \$1 \$2 || return \$?
     }
+
+
+set_main_template() {
+
+python_template=\"# Author : \$user
+# OS : \$distro_name \$distro_version \$arch
+# Date : \$date
+# Project Name : \$project_name
+
+if __name__ == \\\"__main__\\\":
+    
+
+\"
+
+}
+
 
 
 set_python_template() {
@@ -1684,7 +1736,6 @@ python_template=\"# Author : \$user
 # Date : \$date
 # Project Name : \$project_name
 
-if __name__ == \"__main__\":
     
 
 \"
@@ -1740,7 +1791,7 @@ if __name__ == \"__main__\":
                     fi
 
                     if [ \$selected -eq 0 ]; then
-                        add_and_fill \$project_name \$file_to_add || exit \$?
+                        add_and_fill2 \$project_name \$file_to_add || exit \$?
                         break
                     fi
                 else
@@ -1994,7 +2045,6 @@ while [ \"\$#\" -gt 0 ]; do
 
             ;;
     esac
-    shift
 done
 
 # Get programming directory
@@ -2168,7 +2218,6 @@ while [ \"\$#\" -gt 0 ]; do
 
             ;;
     esac
-    shift
 done
 
 # Get programming directory
@@ -2295,7 +2344,6 @@ while [ \"\$#\" -gt 0 ]; do
 
             ;;
     esac
-    shift
 done
 
 # Get programming directory
@@ -2536,7 +2584,6 @@ while [ \"\$#\" -gt 0 ]; do
 
             ;;
     esac
-    shift
 done
 
 # Get programming directory
@@ -2699,47 +2746,47 @@ if [ "$#" -eq 1 ]; then
 
         set_cee_content
         create_exe /bin cee || exit $?
-        fill_file /bin cee $cee_content || exit $?
+        fill_file /bin cee "$cee_content" || exit $?
         
         set_ceepp_content
         create_exe /bin cee++ || exit $?
-        fill_file /bin cee++ $ceepp_content || exit $?
+        fill_file /bin cee++ "$ceepp_content" || exit $?
         
 
         set_asm_content
         create_exe /bin asm || exit $?
-        fill_file /bin asm $asm_content || exit $?
+        fill_file /bin asm "$asm_content" || exit $?
         
 
         set_py_content
         create_exe /bin py || exit $?
-        fill_file /bin py $py_content || exit $?
+        fill_file /bin py "$py_content" || exit $?
         
         set_bscript_content
         create_exe /bin bscript || exit $?
-        fill_file /bin bscript $bscript_content || exit $?
+        fill_file /bin bscript "$bscript_content" || exit $?
 
         set_runc_content
         create_exe /bin runc || exit $?
-        fill_file /bin runc $runc_content || exit $?
+        fill_file /bin runc "$runc_content" || exit $?
         
         set_runcpp_content
         create_exe /bin runc++ || exit $?
-        fill_file /bin runc++ $runcpp_content || exit $?
+        fill_file /bin runc++ "$runcpp_content" || exit $?
         
 
         set_runa_content
         create_exe /bin runa || exit $?
-        fill_file /bin runa $runa_content || exit $?
+        fill_file /bin runa "$runa_content" || exit $?
         
 
         set_runp_content
         create_exe /bin runp || exit $?
-        fill_file /bin runp $runp_content || exit $?
+        fill_file /bin runp "$runp_content" || exit $?
         
         set_runb_content
         create_exe /bin runb || exit $?
-        fill_file /bin runb $runb_content || exit $?
+        fill_file /bin runb "$runb_content" || exit $?
 
 
                 
@@ -2754,14 +2801,16 @@ echo ""
 printf 'Thank you %s for using progtools, progtools is a programming environment for beginners
 the programming file structure is in %s/programming directory
 more languages and ideas will be added in the future
-cee : to edit C files with your favorite editor
-asm : to edit assembly files with your favorite editor
-py : to edit python3 files with your favorite editor
-cee++ : to edit C++ files with your favorite editor
+cee : to create new C project, and edit C files with your favorite editor
+asm : to create new assembly project, and edit assembly files with your favorite editor
+py : to create new python3 project, and edit python3 files with your favorite editor
+cee++ : to create new C++ project, and edit C++ files with your favorite editor
+bscript : to create new bash script project, and edit C++ files with your favorite editor
 runc : to run your C project
 runc++ : to run your C++ project
 runa : to run your assembly project
-runp : to run your python3 project' $1 $home
+runp : to run your python3 project
+runb : to run your bash script project' $1 $home
 echo ""
 
 	else
