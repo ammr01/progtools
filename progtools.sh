@@ -71,7 +71,7 @@ install_deps() {
             echo "You selected: $editor"
             # Install the selected editor
             apt update
-            apt install -fy nasm g++ gcc gdb python3 bc"$editor"
+            apt install -fy nasm g++ gcc gdb python3 bc "$editor"
             break
         else
             {>&2 echo "Invalid choice. Please enter a valid number."; exit 1;}  # Exit the script with an error code
