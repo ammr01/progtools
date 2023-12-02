@@ -1972,6 +1972,7 @@ execute() {
     done
 
     # Print the pattern
+    echo \"\"
     echo \"\$pattern\"
     echo \" status code :  \$status_code \"
     echo \" compiled in \$compile_time s\"
@@ -2145,6 +2146,7 @@ execute() {
     done
 
     # Print the pattern
+    echo \"\"
     echo \"\$pattern\"
     echo \" status code :  \$status_code \"
     echo \" compiled in \$compile_time s\"
@@ -2290,6 +2292,7 @@ execute() {
     done
 
     # Print the pattern
+    echo \"\"
     echo \"\$pattern\"
     echo \" status code :  \$status_code \"
     echo \"  executed in \$execute_time s\"
@@ -2479,6 +2482,7 @@ execute() {
     done
 
     # Print the pattern
+    echo \"\"
     echo \"\$pattern\"
     echo \" status code :  \$status_code \"
     echo \" assembled in \$assemble_time s\"
@@ -2659,6 +2663,7 @@ execute() {
     done
 
     # Print the pattern
+    echo \"\"
     echo \"\$pattern\"
     echo \" status code :  \$status_code \"
     echo \"  executed in \$execute_time s\"
