@@ -97,7 +97,9 @@ install_deps() {
             echo "You selected: $editor"
             # Install the selected editor
             apt update
-            apt install -fy nasm g++ gcc gdb python3 bc $editor
+            apt install -fy nasm g++ gcc gdb python3 bc 
+	    apt install -fy  $editor
+	    
             break
         else
             {>&2 echo "Invalid choice. Please enter a valid number."; exit 1;}  # Exit the script with an error code
@@ -345,7 +347,7 @@ int main(int argc,char** argv){
     option=\"\"
 
    
-    while [[ \$# -gt 0 ]]; do
+     while [[ \$# -gt 0 ]]; do
         case \$1 in
             -h|--help)
                 show_help; exit 0
