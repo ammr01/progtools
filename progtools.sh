@@ -42,7 +42,7 @@ create_directory() {
 
     directory=$1
 
-    if [[ -d $directory ]]; then
+    if [ -d $directory ]; then
         return 0
     else
         mkdir -p $directory || {>&2 echo "Error : Cannot create directory : $directory"; return 1;} 
@@ -69,9 +69,9 @@ fill_file() {
 
     create_directory $directory || return $?
     cd $directory
-    if [[ -f "$file_name" ]]; then
+    if [ -f "$file_name" ]; then
       
-        if [[ -z $(cat $file_name) ]]; then
+        if [ -z $(cat $file_name) ]; then
             echo "$string" > $file_name || {>&2 echo "Error : Cannot write to : $file_name"; return 1;}
         else
             return 0            
@@ -93,7 +93,7 @@ install_deps() {
     # Prompt the user to select a text editor
     PS3="Enter the number of your preferred text editor: "
     select editor in "${editors[@]}"; do
-        if [[ -n $editor ]]; then
+        if [ -n $editor ]; then
             echo "You selected: $editor"
             # Install the selected editor
             apt update
@@ -151,14 +151,14 @@ cee_content="    #!/bin/bash
             directory=\$1
             file_name=\$2
 
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else 
                 create \$directory \$file_name ||  return \$?
             fi
             
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 $editor \"\$file_name\" 
                #^^^^
             else
@@ -184,7 +184,7 @@ cee_content="    #!/bin/bash
             file_name=\$2
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -193,7 +193,7 @@ cee_content="    #!/bin/bash
 
 
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                     touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
@@ -217,7 +217,7 @@ cee_content="    #!/bin/bash
 
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -242,7 +242,7 @@ cee_content="    #!/bin/bash
 
             create_directory \$directory || return \$?
             cd \$directory
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                 echo \"\$string\" > \$file_name || {>&2 echo \"Error : Cannot write to : \$file_name\"; return 1;}
@@ -347,7 +347,7 @@ int main(int argc,char** argv){
     option=\"\"
 
    
-     while [[ \$# -gt 0 ]]; do
+     while [ \$# -gt 0 ]; do
         case \$1 in
             -h|--help)
                 show_help; exit 0
@@ -358,7 +358,7 @@ int main(int argc,char** argv){
                     
                     #Get file name
                     file_to_add=\"\$2\"
-                    if [[ \$file_to_add == *.c ]]; then
+                    if [ \$file_to_add == *.c ]; then
                                           #^^
                         file_to_add=\"\${file_to_add%.c}\"  # Strip .c extension
                                                    #^^           #^^
@@ -506,14 +506,14 @@ ceepp_content="   #!/bin/bash
             directory=\$1
             file_name=\$2
 
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else 
                 create \$directory \$file_name ||  return \$?
             fi
             
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 $editor \"\$file_name\" 
                #^^^^
             else
@@ -539,7 +539,7 @@ ceepp_content="   #!/bin/bash
             file_name=\$2
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -548,7 +548,7 @@ ceepp_content="   #!/bin/bash
 
 
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                     touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
@@ -572,7 +572,7 @@ ceepp_content="   #!/bin/bash
 
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -597,7 +597,7 @@ ceepp_content="   #!/bin/bash
 
             create_directory \$directory || return \$?
             cd \$directory
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                 echo \"\$string\" > \$file_name || {>&2 echo \"Error : Cannot write to : \$file_name\"; return 1;}
@@ -703,7 +703,7 @@ int main(int argc,char** argv){
     option=\"\"
 
     
-    while [[ \$# -gt 0 ]]; do
+    while [ \$# -gt 0 ]; do
         case \$1 in
             -h|--help)
                 show_help; exit 0
@@ -714,7 +714,7 @@ int main(int argc,char** argv){
                     
                     #Get file name
                     file_to_add=\"\$2\"
-                    if [[ \$file_to_add == *.cpp ]]; then
+                    if [ \$file_to_add == *.cpp ]; then
                                           #^^^^
                         file_to_add=\"\${file_to_add%.cpp}\"  # Strip .cpp extension
                                                    #^^^           #^^^^
@@ -871,14 +871,14 @@ asm_content="
             directory=\$1
             file_name=\$2
 
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else 
                 create \$directory \$file_name ||  return \$?
             fi
             
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 $editor \"\$file_name\" 
                #^^^^
             else
@@ -904,7 +904,7 @@ asm_content="
             file_name=\$2
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -913,7 +913,7 @@ asm_content="
 
 
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                     touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
@@ -937,7 +937,7 @@ asm_content="
 
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -962,7 +962,7 @@ asm_content="
 
             create_directory \$directory || return \$?
             cd \$directory
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                 echo \"\$string\" > \$file_name || {>&2 echo \"Error : Cannot write to : \$file_name\"; return 1;}
@@ -1078,7 +1078,7 @@ section .data\"
     options=1
     option=\"\"
 
-    while [[ \$# -gt 0 ]]; do
+    while [ \$# -gt 0 ]; do
         case \$1 in
             -h|--help)
                 show_help; exit 0
@@ -1089,7 +1089,7 @@ section .data\"
                     
                     #Get file name
                     file_to_add=\"\$2\"
-                    if [[ \$file_to_add == *.asm ]]; then
+                    if [ \$file_to_add == *.asm ]; then
                                           #^^^^
                         file_to_add=\"\${file_to_add%.asm}\"  # Strip .asm extension
                                                    #^^^           #^^^^
@@ -1242,14 +1242,14 @@ bscript_content="   #!/bin/bash
             directory=\$1
             file_name=\$2
 
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else 
                 create \$directory \$file_name ||  return \$?
             fi
             
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 $editor \"\$file_name\" 
                #^^^^
             else
@@ -1275,7 +1275,7 @@ bscript_content="   #!/bin/bash
             file_name=\$2
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -1284,7 +1284,7 @@ bscript_content="   #!/bin/bash
 
 
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                     touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
@@ -1308,7 +1308,7 @@ bscript_content="   #!/bin/bash
 
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -1333,7 +1333,7 @@ bscript_content="   #!/bin/bash
 
             create_directory \$directory || return \$?
             cd \$directory
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                 echo \"\$string\" > \$file_name || {>&2 echo \"Error : Cannot write to : \$file_name\"; return 1;}
@@ -1408,7 +1408,7 @@ bash_template=\"#!/bin/bash
     options=1
     option=\"\"
 
-    while [[ \$# -gt 0 ]]; do
+    while [ \$# -gt 0 ]; do
         case \$1 in
             -h|--help)
                 show_help; exit 0
@@ -1419,7 +1419,7 @@ bash_template=\"#!/bin/bash
                     
                     #Get file name
                     file_to_add=\"\$2\"
-                    if [[ \$file_to_add == *.sh ]]; then
+                    if [ \$file_to_add == *.sh ]; then
                                           #^^^^
                         file_to_add=\"\${file_to_add%.sh}\"  # Strip .sh extension
                                                    #^^^           #^^^^
@@ -1574,14 +1574,14 @@ set_py_content() {
             directory=\$1
             file_name=\$2
 
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else 
                 create \$directory \$file_name ||  return \$?
             fi
             
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 $editor \"\$file_name\" 
                #^^^^
             else
@@ -1607,7 +1607,7 @@ set_py_content() {
             file_name=\$2
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -1616,7 +1616,7 @@ set_py_content() {
 
 
             #try to create or open the file 
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                     touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
@@ -1640,7 +1640,7 @@ set_py_content() {
 
         
             #try to create or open the Directory
-            if [[ -d \"\$directory\" ]]; then
+            if [ -d \"\$directory\" ]; then
                 cd \"\$directory\"
             else
                 mkdir -p \"\$directory\" || {>&2 echo \"Error : Cannot create new directory : \$directory\"; return 1;}
@@ -1665,7 +1665,7 @@ set_py_content() {
 
             create_directory \$directory || return \$?
             cd \$directory
-            if [[ -f \"\$file_name\" ]]; then
+            if [ -f \"\$file_name\" ]; then
                 return 0
             else
                 echo \"\$string\" > \$file_name || {>&2 echo \"Error : Cannot write to : \$file_name\"; return 1;}
@@ -1764,7 +1764,7 @@ python_template=\"# Author : \$user
     options=1
     option=\"\"
 
-    while [[ \$# -gt 0 ]]; do
+    while [ \$# -gt 0 ]; do
         case \$1 in
             -h|--help)
                 show_help; exit 0
@@ -1775,7 +1775,7 @@ python_template=\"# Author : \$user
                     
                     #Get file name
                     file_to_add=\"\$2\"
-                    if [[ \$file_to_add == *.py ]]; then
+                    if [ \$file_to_add == *.py ]; then
                                           #^^^^
                         file_to_add=\"\${file_to_add%.py}\"  # Strip .py extension
                                                    #^^^           #^^^^
@@ -1942,7 +1942,7 @@ execute() {
     project_name=\$1
     arguments=\$2
     cd \"\$programming_dir\" || {>&2 echo \"Error : Directory not exist : \$programming_dir\"; return 2;}
-    if [[ -f \"\$project_name\" ]]; then
+    if [ -f \"\$project_name\" ]; then
         start_time=\$(date +%s.%N)
         ./\$project_name \$arguments
         status_code=\$?
@@ -1950,7 +1950,7 @@ execute() {
     
     else
         compile || return \$?
-        if [[ -f \"\$project_name\" ]]; then
+        if [ -f \"\$project_name\" ]; then
             start_time=\$(date +%s.%N)
             ./\$project_name \$arguments
             status_code=\$?
@@ -2116,7 +2116,7 @@ execute() {
     project_name=\$1
     arguments=\$2
     cd \"\$programming_dir\" || {>&2 echo \"Error : Directory not exist : \$programming_dir\"; return 2;}
-    if [[ -f \"\$project_name\" ]]; then
+    if [ -f \"\$project_name\" ]; then
         start_time=\$(date +%s.%N)
         ./\$project_name \$arguments
         status_code=\$?
@@ -2124,7 +2124,7 @@ execute() {
     
     else
         compile || return \$?
-        if [[ -f \"\$project_name\" ]]; then
+        if [ -f \"\$project_name\" ]; then
             start_time=\$(date +%s.%N)
             ./\$project_name \$arguments
             status_code=\$?
@@ -2273,7 +2273,7 @@ execute() {
     project_name=\$1
     arguments=\$2
     cd \"\$programming_dir\" || {>&2 echo \"Error : Directory not exist : \$programming_dir\"; return 2;}
-    if [[ -f \"\$project_name.py\" ]]; then
+    if [ -f \"\$project_name.py\" ]; then
         start_time=\$(date +%s.%N)
         python3 \$project_name.py \$arguments
         status_code=\$?
@@ -2460,7 +2460,7 @@ execute() {
     arguments=\$2
 
     cd \"\$programming_dir\" || {>&2 echo \"Error : Directory not exist : \$programming_dir\"; return 2;}
-    if [[ -f \"\$project_name\" ]]; then
+    if [ -f \"\$project_name\" ]; then
         start_time=\$(date +%s.%N)
         ./\$project_name \$arguments
         status_code=\$?
@@ -2644,7 +2644,7 @@ execute() {
     project_name=\$1
     arguments=\$2
     cd \"\$programming_dir\" || {>&2 echo \"Error : Directory not exist : \$programming_dir\"; return 2;}
-    if [[ -f \"\$project_name.sh\" ]]; then
+    if [ -f \"\$project_name.sh\" ]; then
         start_time=\$(date +%s.%N)
         ./\$project_name.sh \$arguments
         status_code=\$?
