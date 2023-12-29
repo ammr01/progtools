@@ -156,7 +156,7 @@ retry() {
     editor=$1
     if [ -z $editor ]; then
         return 1
-    elif [[ $editor == "vscode" ]]
+    elif [[ $editor == "vscode" ]] ;then
         editor=code
         apt install $editor || retry_vscode
     else
