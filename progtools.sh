@@ -977,7 +977,7 @@ start(){
 
     if [ \$no_browser -eq 1 ]; then
 
-        xdg-open \"http://localhost:\$serverport\" &
+        setsid xdg-open \"http://localhost:\$serverport\" &
 
     else
         echo -e \"server is available on \033[94;1mhttp://localhost:\$serverport\033[m, also it available publicy using the server IP\"
@@ -1905,7 +1905,7 @@ mkdir -p $programming_dir/{C,C++,python,asm,bash,php}
 chown "$user_name:$user_name" "$programming_dir"
 mkdir -p $progtools_dir || echo "$progtools_dir is already exist" >&2
 chown "$user_name:$user_name" "$progtools_dir"
-echo -e "\nexport PATH=$PATH:$progtools_dir" >> $user_home/.bashrc
+echo -e "\nexport PATH=$PATH:$progtools_dir" >> "$user_home/.$(basename echo $SHELL)rc"
 chown "$user_name:$user_name" $programming_dir/{C,C++,python,asm,bash,php} || exist $?
 
 set_cee_content
