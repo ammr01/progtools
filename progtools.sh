@@ -1905,7 +1905,7 @@ mkdir -p $programming_dir/{C,C++,python,asm,bash,php}
 chown "$user_name:$user_name" "$programming_dir"
 mkdir -p $progtools_dir || echo "$progtools_dir is already exist" >&2
 chown "$user_name:$user_name" "$progtools_dir"
-echo -e "\nexport PATH=$PATH:$progtools_dir" >> "$user_home/.$(basename echo $SHELL)rc"
+echo -e "\nexport PATH=$PATH:$progtools_dir" >> "$user_home/.$(basename `echo $SHELL`)rc"
 chown "$user_name:$user_name" $programming_dir/{C,C++,python,asm,bash,php} || exist $?
 
 set_cee_content
