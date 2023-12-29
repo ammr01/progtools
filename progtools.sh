@@ -125,9 +125,49 @@ fill_file() {
     
 }
 
+
+retry_vscode() {
+    if [ -e /etc/os-release ]; then
+    # Source the file to load variables
+    . /etc/os-release
+        # Check if the PRETTY_NAME variable contains "Kali"
+        if [[ $PRETTY_NAME == *"Kali"* ]]; then
+            editor=code-oss
+            return 0
+        fi
+    fi
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg || return 5
+    install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft-archive-keyring.gpg || return 6
+    sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' || return 7
+    apt-get update || return 8
+    apt-get install code || apt-get install code-insiders || return 9
+    return 0
+}
+
+retry() {
+
+    if [ "$#" -lt 1 ]; then
+        {>&2 echo "Error : Few arguments to retry() function."; return 2;}
+    elif [ "$#" -gt 1 ]; then
+        {>&2 echo "Error : Many arguments to retry() function."; return 2;}
+    
+    fi
+
+    editor=$1
+    if [ -z $editor ]; then
+        return 1
+    elif [[ $editor == "vscode" ]]
+        editor=code
+        apt install $editor || retry_vscode
+    else
+        return 2
+    fi
+    
+}
+
 install_deps() {
   # List of popular text editors
-    editors=("vim" "code" "gedit" "nano" "emacs")
+    editors=("vim" "vscode" "gedit" "nano" "emacs")
     # Prompt the user to select a text editor
     PS3="Enter the number of your preferred text editor: "
     select editor in "${editors[@]}"; do
@@ -136,7 +176,7 @@ install_deps() {
             # Install the selected editor
             apt update || {>&2 echo "Apt error!"; return 1;}
             apt install -fy nasm php g++ gcc gdb python3 bc || {>&2 echo "Apt error!"; return 1;}  
-	        apt install -fy  $editor || {>&2 echo "Apt error!"; return 1;}
+	        apt install -fy  $editor || retry $editor || return $?
 	    
             break
         else
@@ -1899,14 +1939,14 @@ fi
 programming_dir="$user_home/programming"
 progtools_dir="$user_home/progtools"
 
-install_deps || exist $?
+install_deps || exit $?
     
 mkdir -p $programming_dir/{C,C++,python,asm,bash,php} 
 chown "$user_name:$user_name" "$programming_dir"
 mkdir -p $progtools_dir || echo "$progtools_dir is already exist" >&2
 chown "$user_name:$user_name" "$progtools_dir"
 echo -e "\nexport PATH=$PATH:$progtools_dir" >> "$user_home/.$(basename `echo $SHELL`)rc"
-chown "$user_name:$user_name" $programming_dir/{C,C++,python,asm,bash,php} || exist $?
+chown "$user_name:$user_name" $programming_dir/{C,C++,python,asm,bash,php} || exit $?
 
 set_cee_content
 create_exe "$progtools_dir/cee" || exit $?
