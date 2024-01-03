@@ -1915,6 +1915,64 @@ bscript_bash_template=\"#!/bin/bash
 
 }
 
+set_completion_content(){
+
+    completion_content="_progtools_complete() {
+    
+    local cur opts
+    local dir
+    COMPREPLY=()
+    cur=\"\${COMP_WORDS[COMP_CWORD]}\"
+    # Check the command being completed (cee or runc)
+    case \"\${COMP_WORDS[0]}\" in
+        cee|runc)
+            dir=\"C\"        
+            ;;
+        cee++|runc++)
+            dir=\"C++\"
+            ;;
+        asm|runa)
+            dir=\"asm\"
+            ;;
+        py|runpy)
+            dir=\"python\"
+            ;;
+        bscript|runb)
+            dir=\"bash\"
+            ;;
+        phpp|runphp)
+            dir=\"php\"
+            ;;
+        *) ;;
+    esac
+        # Get a list of project directories in /home/user/programming/C
+            opts=\$(ls -d /home/user/programming/\$dir/*/ 2>/dev/null | xargs -n 1 basename | grep \"^\$cur\")
+            COMPREPLY=( \$(compgen -W \"\$opts\" -- \$cur) )
+        
+    return 0
+}
+
+complete -F _progtools_complete cee
+complete -F _progtools_complete runc
+
+complete -F _progtools_complete cee++
+complete -F _progtools_complete runc++
+
+complete -F _progtools_complete asm
+complete -F _progtools_complete runa
+
+complete -F _progtools_complete py
+complete -F _progtools_complete runpy
+
+complete -F _progtools_complete bscript
+complete -F _progtools_complete runb
+
+complete -F _progtools_complete phpp
+complete -F _progtools_complete runphp
+" 
+
+}
+
 
 if [ "$#" -lt 1 ]; then
     >&2 echo "invalid number of arguments" ;show_help
@@ -1945,7 +2003,7 @@ mkdir -p $programming_dir/{C,C++,python,asm,bash,php}
 chown "$user_name:$user_name" "$programming_dir"
 mkdir -p $progtools_dir || echo "$progtools_dir is already exist" >&2
 chown "$user_name:$user_name" "$progtools_dir"
-echo -e "\nexport PATH=\$PATH:$progtools_dir" >> "$user_home/.$(basename `echo $SHELL`)rc"
+echo -e "\nPATH=\$PATH:$progtools_dir" >> "$user_home/.$(basename `echo $SHELL`)rc"
 chown "$user_name:$user_name" $programming_dir/{C,C++,python,asm,bash,php} || exit $?
 
 set_cee_content
@@ -2010,9 +2068,16 @@ set_temp_content
 create_exe "$progtools_dir/temp.sh" || exit $?
 fill_file "$progtools_dir/temp.sh" "$temp_content" || exit $?
 
+set_completion_content
+create_exe "$progtools_dir/completion" || exit $?
+fill_file "$progtools_dir/completion" "$completion_content" || exit $?
+
+
+echo -e "\nsource $progtools_dir/completion" >> "$user_home/.$(basename `echo $SHELL`)rc"
+
 echo ""
-printf 'Thank you %s for using progtools, progtools is a programming environment for beginners
-the programming file structure is in %s/programming directory
+echo -e "Thank you $user_name for using progtools, progtools is a programming environment for beginners
+the programming file structure is in $programming_dir directory
 more languages and ideas will be added in the future
 cee : to create new C project, and edit C files with your favorite editor
 asm : to create new assembly project, and edit assembly files with your favorite editor
@@ -2025,5 +2090,8 @@ runc++ : to run your C++ project
 runa : to run your assembly project
 runpy : to run your python3 project
 runb : to run your bash script project
-runphp : to start php server, and open project in default browser' $1 $home
-echo ""
+runphp : to start php server, and open project in default browser
+do not forget to execute this command after the installation \"$user_home/.$(basename `echo $SHELL`)rc\"
+or just exit the terminal and reopen it" 
+
+
