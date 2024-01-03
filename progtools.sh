@@ -166,23 +166,32 @@ retry() {
 }
 
 install_deps() {
-  # List of popular text editors
-    editors=("vim" "vscode" "gedit" "nano" "emacs")
-    # Prompt the user to select a text editor
-    PS3="Enter the number of your preferred text editor: "
-    select editor in "${editors[@]}"; do
-        if [ -n $editor ]; then
-            echo "You selected: $editor"
-            # Install the selected editor
-            apt update || {>&2 echo "Apt error!"; return 1;}
-            apt install -fy nasm php g++ gcc gdb python3 bc || {>&2 echo "Apt error!"; return 1;}  
-	        apt install -fy  $editor || retry $editor || return $?
-	    
-            break
-        else
-            {>&2 echo "Invalid choice. Please enter a valid number."; return 1;}  # Exit the script with an error code
-        fi
-    done
+    if [ "$#" -gt 1 ]; then
+        {>&2 echo "Error : Many arguments to install_deps() function."; return 2;}
+    
+    fi
+    if [ "$#" -eq 1 ]; then
+        editor=$1
+    else
+        # List of popular text editors
+        editors=("vim" "vscode" "gedit" "nano" "emacs")
+        # Prompt the user to select a text editor
+        PS3="Enter the number of your preferred text editor: "
+        select editor in "${editors[@]}"; do
+            if [ -n "$editor" ]; then
+                echo "You selected: $editor"
+                break
+            else
+                >&2 echo "Invalid choice. Please enter a valid number.";   # Exit the script with an error code
+            fi
+        done
+    fi
+    
+    # Install the selected editor
+    apt update || {>&2 echo "Apt error!"; return 1;}
+    apt install -fy nasm php g++ gcc gdb python3 bc || {>&2 echo "Apt error!"; return 1;}  
+    apt install -fy  $editor || retry $editor || return $?
+
 
 
 }
@@ -1979,6 +1988,7 @@ if [ "$#" -lt 1 ]; then
     exit 5
 fi
 user_name=$1
+editor=""
 exist=0
 id "$user_name" >/dev/null || exist=1
 
@@ -1997,7 +2007,7 @@ fi
 programming_dir="$user_home/programming"
 progtools_dir="$user_home/progtools"
 
-install_deps || exit $?
+install_deps $editor || exit $?
     
 mkdir -p $programming_dir/{C,C++,python,asm,bash,php} 
 chown "$user_name:$user_name" "$programming_dir"
