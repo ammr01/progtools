@@ -1988,7 +1988,7 @@ if [ "$#" -lt 1 ]; then
     exit 5
 fi
 user_name=$1
-editor=""
+editor=$2
 exist=0
 id "$user_name" >/dev/null || exist=1
 
@@ -2007,6 +2007,7 @@ fi
 programming_dir="$user_home/programming"
 progtools_dir="$user_home/progtools"
 
+echo $editor
 install_deps $editor || exit $?
     
 mkdir -p $programming_dir/{C,C++,python,asm,bash,php} 
