@@ -1954,10 +1954,16 @@ set_completion_content(){
             ;;
         *) ;;
     esac
+
         # Get a list of project directories in /home/user/programming/C
-            opts=\$(ls -d /home/user/programming/\$dir/*/ 2>/dev/null | xargs -n 1 basename | grep \"^\$cur\")
-            COMPREPLY=( \$(compgen -W \"\$opts\" -- \$cur) )
-        
+            if [ -z \"\$cur\" ]; then
+                opts=\$(ls -d /home/user/programming/\$dir/*/ 2>/dev/null | xargs -n 1 basename)
+            else
+                opts=\$(ls -d /home/user/programming/\$dir/*/ 2>/dev/null | xargs -n 1 basename | grep \"^\$cur\")
+            fi
+            
+            COMPREPLY=( \$(compgen -W \"\$opts\"  \$cur) )
+          
     return 0
 }
 
