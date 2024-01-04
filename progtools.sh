@@ -189,7 +189,7 @@ install_deps() {
     
     # Install the selected editor
     apt update || {>&2 echo "Apt error!"; return 1;}
-    apt install -fy nasm php g++ gcc gdb python3 bc || {>&2 echo "Apt error!"; return 1;}  
+    apt install -fy nasm php bash-completion g++ gcc gdb python3 bc || {>&2 echo "Apt error!"; return 1;}  
     apt install -fy  $editor || retry $editor || return $?
 
 
