@@ -895,7 +895,6 @@ execute() {
     arguments=\$2
     cd \"\$programming_dir\" || {>&2 echo \"Error : Directory not exist : \$programming_dir\"; return 2;}
     if [[ -f \"\$project_name.sh\" ]]; then
-        chmod +x ./\$project_name.sh  
         start_time=\$(date +%s.%N)
         ./\$project_name.sh \$arguments
         status_code=\$?
@@ -1164,6 +1163,10 @@ create() {
         return 0
     else
         touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
+        if [[ \$file_name == \"*.sh\" ]]; then
+            chmod +x \$file_name || return \$?
+        fi
+
     fi
 }
 
