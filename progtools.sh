@@ -1163,7 +1163,7 @@ create() {
         return 0
     else
         touch \"\$file_name\" || {>&2 echo \"Error : Cannot create new File : \$file_name\"; return 1;}
-        if [[ \$file_name == \"*.sh\" ]]; then
+        if [[ \$file_name == *.sh ]]; then
             chmod +x \$file_name || return \$?
         fi
 
@@ -1225,6 +1225,7 @@ fill_file() {
     if [ -f \"\$file_name\" ] && [ \$existdir -eq 0 ] ; then
         return 0
     else
+        create \"\$path\"  ||  return \$?
         echo \"\$string\" > \$file_name || {>&2 echo \"Error : Cannot write to : \$file_name\"; return 1;}
     fi
     
